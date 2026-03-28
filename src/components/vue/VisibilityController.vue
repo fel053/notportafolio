@@ -17,7 +17,6 @@ const system = useSystemStore();
 
 <style scoped>
 .page-content {
-  /* Asegura que el contenido ocupe todo el espacio */
   min-height: calc(100vh - 150px);
 }
 
