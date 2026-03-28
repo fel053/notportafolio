@@ -1,11 +1,588 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/vue/HeroSection.vue';
+import AnimatedSection from '../components/vue/AnimatedSection.vue';
+import ProjectCard from '../components/vue/ProjectCard.vue';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+const projects = [
+  {
+    number: '[001]',
+    name: 'UMBRAL',
+    paragraphs: [
+      'Un inicio que no empieza de inmediato.',
+      'Porque no todo tiene que apurarse.',
+    ],
+  },
+  {
+    number: '[002]',
+    name: 'RITMO',
+    paragraphs: [
+      'No responde al scroll.',
+      'Responde a cómo te mueves.',
+      '(Sí, suena pretencioso. Funciona igual.)',
+    ],
+  },
+  {
+    number: '[003]',
+    name: 'ESTRUCTURA',
+    paragraphs: [
+      'Eliminar cosas también es construir.',
+      'A veces es lo único necesario.',
+    ],
+  },
+];
+
+const tools = [
+  { name: 'VUE',        desc: 'Para que las cosas cambien sin romperse.' },
+  { name: 'GSAP',       desc: 'Para que el movimiento no parezca accidente.' },
+  { name: 'ASTRO',      desc: 'Para que cargue rápido. Porque sí importa.' },
+  { name: 'JAVASCRIPT', desc: 'Donde las cosas dejan de ser opinión.' },
+  { name: 'CSS',        desc: 'Donde todos creen que es fácil. Hasta que deja de serlo.' },
+];
+
+const trayectoria = [
+  { label: 'MIRAR',     text: 'Antes de hacer cualquier cosa.' },
+  { label: 'ENTENDER',  text: 'Por qué existe.' },
+  { label: 'CONSTRUIR', text: 'Sin agregar de más.' },
+  { label: 'REPETIR',   text: 'Hasta que no moleste.' },
+];
 ---
 
 <Layout>
-	<Welcome />
+
+  <!-- ══════════════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════════════ -->
+  <HeroSection client:only="vue" />
+
+  <!-- ── divider ──────────────────────────────────────── -->
+  <div class="seg-wrap" style="padding-top: 1rem; padding-bottom: 1rem;">
+    <div class="seg">
+      <span class="seg-line"></span>
+      <span class="seg-text">> NADA_AQUÍ_ES_CASUAL // (AUNQUE_LO_PAREZCA)</span>
+      <span class="seg-line"></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       01 · APERTURA
+  ════════════════════════════════════════════════════ -->
+  <div id="apertura">
+    <AnimatedSection client:only="vue">
+      <div class="s">
+        <span class="sec-num" style="top: 50%; transform: translateY(-50%); right: var(--pad-x);">01</span>
+        <div class="s-inner s-narrow">
+          <span class="sec-label">> ANTES_DE_EMPEZAR</span>
+          <div class="hud" style="padding: 2rem 2rem 2.5rem;">
+            <div class="prose">
+              <p>No todo lo que está acá era necesario.</p>
+              <p class="muted">De hecho,<br />la mayoría no lo es.</p>
+              <p class="muted">Pero existe por una razón simple:</p>
+              <p>alguien decidió hacerlo bien.</p>
+              <p class="muted">No rápido.</p>
+              <p class="muted">No "suficiente".</p>
+              <p>Bien.</p>
+              <p class="cyan">// Eso ya es bastante raro.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </AnimatedSection>
+  </div>
+
+  <!-- ── divider ──────────────────────────────────────── -->
+  <div class="seg-wrap" style="padding: 0.5rem var(--pad-x);">
+    <div class="seg">
+      <span class="seg-line"></span>
+      <span class="seg-text" style="color: rgba(255,32,120,.3);">// ESTO_TAMBIÉN_FUE_UNA_DECISIÓN</span>
+      <span class="seg-line" style="background: linear-gradient(90deg, transparent, rgba(255,32,120,.2), transparent);"></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       02 · MANIFIESTO
+  ════════════════════════════════════════════════════ -->
+  <AnimatedSection client:only="vue">
+    <div class="s">
+      <span class="sec-num" style="bottom: 0; left: var(--pad-x); -webkit-text-stroke-color: rgba(255,32,120,.05);">02</span>
+      <div class="s-inner s-narrow">
+        <span class="sec-label sec-label-pink">> SOBRE_HACER_COSAS</span>
+        <div class="prose">
+          <p>No todo lo que se puede animar,<br />se debería animar.</p>
+          <p class="muted">No todo lo que brilla<br />mejora algo.</p>
+          <p style="color: var(--pink); font-family: var(--font-mono); font-size: 0.85em; letter-spacing: 0.08em;">
+            > El problema no es la falta de ideas.
+          </p>
+          <p>Es la falta de criterio.</p>
+          <p class="muted">Una buena decisión pasa desapercibida.</p>
+          <p class="muted">Una mala,<br />también.</p>
+          <p class="muted" style="font-style: italic;">Pero por razones distintas.</p>
+          <p>Si todo destaca,<br />nada lo hace.</p>
+          <p class="muted" style="font-size: 0.88em;">(Incluyendo este párrafo, probablemente.)</p>
+          <p class="muted">Hay interfaces que explican todo.</p>
+          <p>Y otras que confían un poco más.</p>
+          <p style="color: var(--cyan); font-family: var(--font-mono); font-size: 0.85em; letter-spacing: 0.08em;">
+            > Esta intenta lo segundo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </AnimatedSection>
+
+  <!-- ── divider ──────────────────────────────────────── -->
+  <div class="seg-wrap" style="padding: 0.5rem var(--pad-x);">
+    <div class="seg">
+      <span class="seg-line" style="background: linear-gradient(90deg, transparent, rgba(255,230,0,.2), transparent);"></span>
+      <span class="seg-text" style="color: rgba(255,230,0,.3);">◆ PODRÍAS_HABER_SALIDO_ANTES ◆</span>
+      <span class="seg-line" style="background: linear-gradient(90deg, transparent, rgba(255,230,0,.2), transparent);"></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       03 · TRABAJO
+  ════════════════════════════════════════════════════ -->
+  <AnimatedSection client:only="vue">
+    <div class="s">
+      <span class="sec-num" style="top: 10%; right: var(--pad-x);">03</span>
+      <div class="s-inner">
+        <div class="work-header">
+          <span class="sec-label">> COSAS_QUE_TERMINÉ</span>
+          <span class="work-count">[3 / 3 LOADED]</span>
+        </div>
+        <div class="projects-grid">
+          {projects.map(project => (
+            <ProjectCard client:load project={project} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </AnimatedSection>
+
+  <!-- ── divider ──────────────────────────────────────── -->
+  <div class="seg-wrap" style="padding: 0.5rem var(--pad-x);">
+    <div class="seg">
+      <span class="seg-line"></span>
+      <span class="seg-text">── SIGUE ──</span>
+      <span class="seg-line"></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       04 · HERRAMIENTAS
+  ════════════════════════════════════════════════════ -->
+  <AnimatedSection client:only="vue">
+    <div class="s">
+      <span class="sec-num" style="bottom: 0; left: var(--pad-x); -webkit-text-stroke-color: rgba(0,229,255,.04);">04</span>
+      <div class="s-inner">
+        <div class="tools-header">
+          <span class="sec-label">> MEDIOS_(NO_MILAGROS)</span>
+          <div class="tools-intro prose" style="max-width: 520px; margin-bottom: 3rem;">
+            <p class="muted">Las herramientas ayudan.</p>
+            <p>Pero no toman decisiones.</p>
+            <p class="cyan">// Por suerte.</p>
+          </div>
+        </div>
+        <ul class="tools-grid">
+          {tools.map((tool, i) => (
+            <li class="tool-panel">
+              <div class="tool-head">
+                <span class="tool-arrow">&gt;</span>
+                <span class="tool-name">{tool.name}</span>
+                <span class="tool-bar-wrap">
+                  <span class="tool-bar" style={`width: ${85 - i * 5}%`}></span>
+                </span>
+                <span class="tool-dot">●</span>
+              </div>
+              <p class="tool-desc">{tool.desc}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </AnimatedSection>
+
+  <!-- ══════════════════════════════════════════════════
+       05 · VISIÓN
+  ════════════════════════════════════════════════════ -->
+  <AnimatedSection client:only="vue">
+    <div class="s vision-s">
+      <span class="sec-num" style="top: 50%; transform: translateY(-50%); right: var(--pad-x); -webkit-text-stroke-color: rgba(255,32,120,.05);">05</span>
+      <div class="s-inner s-narrow">
+        <span class="sec-label sec-label-pink">> LO_QUE_HAY_DETRÁS</span>
+        <div class="vision-box">
+          <div class="vision-corner vision-tl"></div>
+          <div class="vision-corner vision-br"></div>
+          <div class="prose">
+            <p>Hay demasiadas interfaces tratando de llamar la atención.</p>
+            <p class="muted">Demasiadas animaciones pidiendo aplausos.</p>
+            <p style="color: var(--pink); font-family: var(--font-mono); font-size: 0.85em; letter-spacing: 0.08em;">
+              > Esto no compite por eso.
+            </p>
+            <p class="muted">Prefiere funcionar bien.</p>
+            <p>Y durar más de cinco segundos en la memoria.</p>
+            <p class="muted">Si no pasa,<br />tampoco es el fin del mundo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </AnimatedSection>
+
+  <!-- ══════════════════════════════════════════════════
+       06 · TRAYECTORIA
+  ════════════════════════════════════════════════════ -->
+  <AnimatedSection client:only="vue">
+    <div class="s">
+      <span class="sec-num" style="bottom: 0; right: var(--pad-x);">06</span>
+      <div class="s-inner">
+        <span class="sec-label">> RECORRIDO_(RESUMIDO)</span>
+        <div class="timeline">
+          {trayectoria.map((item, i) => (
+            <div class="tl-item">
+              <div class="tl-connector">
+                <span class="tl-dot"></span>
+                {i < trayectoria.length - 1 && <span class="tl-line"></span>}
+              </div>
+              <div class="tl-content">
+                <h3 class="tl-label">{item.label}</h3>
+                <p class="tl-text">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </AnimatedSection>
+
+  <!-- ── divider ──────────────────────────────────────── -->
+  <div class="seg-wrap" style="padding: 0.5rem var(--pad-x);">
+    <div class="seg">
+      <span class="seg-line" style="background: linear-gradient(90deg, transparent, rgba(255,32,120,.2), transparent);"></span>
+      <span class="seg-text" style="color: rgba(255,32,120,.3);">// NO_ES_URGENTE</span>
+      <span class="seg-line" style="background: linear-gradient(90deg, transparent, rgba(255,32,120,.2), transparent);"></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       07 · CIERRE
+  ════════════════════════════════════════════════════ -->
+  <AnimatedSection client:only="vue">
+    <div class="s cierre-s">
+      <div class="s-inner s-narrow">
+        <span class="sec-label">—</span>
+        <div class="cierre-inner">
+          <p class="cierre-dash neon-flicker">—</p>
+          <div class="prose">
+            <p>Si llegaste hasta acá,<br />algo funcionó.</p>
+            <p class="muted">No voy a explicarlo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </AnimatedSection>
+
+  <!-- ══════════════════════════════════════════════════
+       08 · CONTACTO
+  ════════════════════════════════════════════════════ -->
+  <AnimatedSection client:only="vue">
+    <div class="s contact-s">
+      <div class="s-inner s-narrow">
+        <span class="sec-label">> CONTACTO</span>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="t-dot t-red"></span>
+            <span class="t-dot t-yellow"></span>
+            <span class="t-dot t-cyan"></span>
+            <span class="t-bar-label">> session_active</span>
+          </div>
+          <div class="terminal-body">
+            <div class="prose" style="margin-bottom: 2.5rem;">
+              <p class="muted">
+                Si necesitas algo rápido,<br />probablemente no soy la mejor opción.
+              </p>
+              <p>Si necesitas algo pensado,<br />podemos hablar.</p>
+            </div>
+            <div class="terminal-prompt">
+              <span class="prompt-prefix">$</span>
+              <a href="mailto:" class="btn-neon">
+                Escribir
+                <span>↗</span>
+              </a>
+              <span class="prompt-cursor">_</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </AnimatedSection>
+
 </Layout>
+
+<style is:global>
+
+  /* ── Work section ──────────────────────────────────── */
+  .work-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0;
+  }
+
+  .work-count {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: rgba(0,229,255,.3);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    margin-top: 0;
+  }
+
+  @media (max-width: 860px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Tools ──────────────────────────────────────────── */
+  .tools-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+  }
+
+  .tool-panel {
+    background: rgba(0, 8, 18, 0.7);
+    border: 1px solid rgba(0,229,255,.1);
+    padding: 1.4rem 1.2rem;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .tool-panel:hover {
+    border-color: rgba(0,229,255,.35);
+    background: rgba(0,229,255,.03);
+  }
+
+  .tool-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .tool-arrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--cyan);
+  }
+
+  .tool-name {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--cyan);
+  }
+
+  .tool-bar-wrap {
+    flex: 1;
+    height: 1px;
+    background: rgba(0,229,255,.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tool-bar {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,229,255,.6), rgba(0,229,255,.2));
+  }
+
+  .tool-dot {
+    font-size: 0.4rem;
+    color: var(--cyan);
+    text-shadow: var(--glow-c);
+  }
+
+  .tool-desc {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--fg-2);
+    line-height: 1.65;
+  }
+
+  /* ── Timeline ───────────────────────────────────────── */
+  .timeline {
+    max-width: 600px;
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 1.5rem;
+  }
+
+  .tl-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tl-dot {
+    width: 10px; height: 10px;
+    border: 1px solid var(--cyan);
+    background: var(--bg);
+    box-shadow: 0 0 10px rgba(0,229,255,.7);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    margin-top: 0.55rem;
+  }
+
+  .tl-line {
+    width: 1px;
+    flex: 1;
+    min-height: 2.5rem;
+    background: linear-gradient(to bottom, rgba(0,229,255,.4), rgba(0,229,255,.08));
+  }
+
+  .tl-content {
+    padding-bottom: 2.5rem;
+  }
+
+  .tl-label {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--fg);
+    margin-bottom: 0.35rem;
+  }
+
+  .tl-text {
+    font-family: var(--font-body);
+    font-size: 0.86rem;
+    font-weight: 300;
+    color: var(--fg-2);
+    line-height: 1.6;
+  }
+
+  /* ── Vision box ─────────────────────────────────────── */
+  .vision-box {
+    position: relative;
+    padding: 2rem 2rem 2.5rem;
+    background: rgba(255,32,120,.02);
+    border: 1px solid rgba(255,32,120,.15);
+    box-shadow: 0 0 30px rgba(255,32,120,.04), inset 0 0 20px rgba(255,32,120,.03);
+  }
+
+  .vision-corner {
+    position: absolute;
+    width: 16px; height: 16px;
+  }
+  .vision-tl {
+    top: 0; left: 0;
+    border-top: 1px solid rgba(255,32,120,.5);
+    border-left: 1px solid rgba(255,32,120,.5);
+  }
+  .vision-br {
+    bottom: 0; right: 0;
+    border-bottom: 1px solid rgba(255,32,120,.5);
+    border-right: 1px solid rgba(255,32,120,.5);
+  }
+
+  /* ── Cierre ─────────────────────────────────────────── */
+  .cierre-s { text-align: center; }
+
+  .cierre-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .cierre-dash {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--cyan);
+    text-shadow: var(--glow-c);
+    line-height: 1;
+  }
+
+  /* ── Terminal / Contact ─────────────────────────────── */
+  .contact-s {
+    padding-bottom: calc(var(--sec-gap) * 1.5);
+  }
+
+  .terminal {
+    border: 1px solid rgba(0,229,255,.22);
+    background: rgba(0,10,20,.6);
+    box-shadow: 0 0 25px rgba(0,229,255,.06), inset 0 0 20px rgba(0,229,255,.02);
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid rgba(0,229,255,.12);
+    background: rgba(0,229,255,.04);
+  }
+
+  .t-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+  }
+  .t-red    { background: var(--pink);   box-shadow: 0 0 4px var(--pink); }
+  .t-yellow { background: var(--yellow); box-shadow: 0 0 4px var(--yellow); }
+  .t-cyan   { background: var(--cyan);   box-shadow: 0 0 4px var(--cyan); }
+
+  .t-bar-label {
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    color: rgba(0,229,255,.35);
+  }
+
+  .terminal-body {
+    padding: 2rem 1.5rem 2.5rem;
+  }
+
+  .terminal-prompt {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .prompt-prefix {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--cyan);
+  }
+
+  .prompt-cursor {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--cyan);
+    text-shadow: var(--glow-c);
+    animation: blink-cur 1s step-end infinite;
+  }
+  @keyframes blink-cur { 50% { opacity: 0; } }
+
+  /* ── Responsive tweaks ──────────────────────────────── */
+  @media (max-width: 600px) {
+    .work-header { flex-direction: column; }
+    .tools-grid  { grid-template-columns: 1fr; }
+    .cierre-s    { text-align: left; }
+    .cierre-inner { align-items: flex-start; }
+  }
+</style>

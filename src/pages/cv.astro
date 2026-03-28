@@ -1,0 +1,244 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AnimatedSection from '../components/vue/AnimatedSection.vue';
+
+const cvData = {
+  name: "Tu Nombre",
+  role: "Frontend Developer",
+  contact: {
+    email: "tu@email.com",
+    github: "https://github.com/tuusuario",
+    linkedin: "https://linkedin.com/in/tuusuario"
+  },
+  experience: [
+    { title: "Frontend Developer", company: "Neon Corp",    period: "2024 — HOY",  description: "Desarrollo de interfaces con Vue y GSAP." },
+    { title: "UI/UX Intern",       company: "Cyber Studio", period: "2023 — 2024", description: "Diseño de prototipos y animaciones para aplicaciones web." }
+  ],
+  skills: ["Vue", "Astro", "GSAP", "R", "CSS Grid", "Figma"]
+};
+---
+
+<Layout>
+  <AnimatedSection client:only="vue">
+    <div class="s cv-section">
+      <div class="s-inner">
+
+        <!-- header -->
+        <div class="cv-header">
+          <div class="cv-header-meta">
+            <span class="sec-label">> SYS.CURRICULUM_VITAE</span>
+            <span class="cv-version">v2.0 / 2026</span>
+          </div>
+          <div class="cv-name-wrap">
+            <h1 class="cv-name glitch" data-text={cvData.name}>{cvData.name}</h1>
+            <p class="cv-role">&gt;&nbsp;{cvData.role}</p>
+          </div>
+          <div class="cv-contact-row">
+            <a href={`mailto:${cvData.contact.email}`} class="cv-contact-link">
+              <span class="cv-contact-icon">@</span>{cvData.contact.email}
+            </a>
+            <a href={cvData.contact.github} target="_blank" rel="noopener" class="cv-contact-link">
+              <span class="cv-contact-icon">/</span>GitHub
+            </a>
+            <a href={cvData.contact.linkedin} target="_blank" rel="noopener" class="cv-contact-link">
+              <span class="cv-contact-icon">/</span>LinkedIn
+            </a>
+          </div>
+          <div class="cv-header-bar"></div>
+        </div>
+
+        <!-- experience -->
+        <div class="cv-block">
+          <span class="sec-label">> EXPERIENCIA</span>
+          {cvData.experience.map(exp => (
+            <div class="cv-item">
+              <div class="cv-item-period">{exp.period}</div>
+              <div class="cv-item-body">
+                <h3 class="cv-item-title">{exp.title}</h3>
+                <span class="cv-item-company">{exp.company}</span>
+                <p class="cv-item-desc">{exp.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- skills -->
+        <div class="cv-block">
+          <span class="sec-label">> HABILIDADES</span>
+          <ul class="cv-skills">
+            {cvData.skills.map(skill => (
+              <li class="cv-skill-item">{skill}</li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- back link -->
+        <div class="cv-back">
+          <a href="/" class="btn-neon" style="font-size: 0.65rem;">
+            <span>←</span> VOLVER
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </AnimatedSection>
+</Layout>
+
+<style is:global>
+  .cv-section {
+    padding-top: calc(var(--sec-gap) + 4rem);
+  }
+
+  .cv-header {
+    margin-bottom: calc(var(--sec-gap) * 0.9);
+  }
+
+  .cv-header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2.5rem;
+  }
+
+  .cv-version {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--fg-3);
+  }
+
+  .cv-name-wrap {
+    margin-bottom: 1.5rem;
+  }
+
+  .cv-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--fg);
+    text-shadow: 0 0 40px rgba(0,229,255,.08);
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-role {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--cyan);
+  }
+
+  .cv-contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .cv-contact-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--fg-2);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: color 0.3s;
+  }
+  .cv-contact-link:hover { color: var(--cyan); }
+
+  .cv-contact-icon {
+    color: var(--cyan);
+    opacity: 0.5;
+  }
+
+  .cv-header-bar {
+    height: 1px;
+    background: linear-gradient(90deg, var(--cyan-mid), rgba(255,32,120,.3), transparent);
+    box-shadow: 0 0 8px rgba(0,229,255,.15);
+  }
+
+  /* experience */
+  .cv-block {
+    margin-bottom: calc(var(--sec-gap) * 0.75);
+  }
+
+  .cv-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid rgba(0,229,255,.08);
+  }
+  .cv-item:first-of-type { border-top: 1px solid rgba(0,229,255,.08); }
+
+  .cv-item-period {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--fg-3);
+    padding-top: 0.3rem;
+    white-space: nowrap;
+  }
+
+  .cv-item-title {
+    font-family: var(--font-display);
+    font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--fg);
+    margin-bottom: 0.2rem;
+  }
+
+  .cv-item-company {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--cyan);
+    margin-bottom: 0.6rem;
+  }
+
+  .cv-item-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--fg-2);
+    line-height: 1.65;
+  }
+
+  /* skills */
+  .cv-skills {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .cv-skill-item {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--cyan);
+    border: 1px solid rgba(0,229,255,.25);
+    padding: 0.3rem 0.8rem;
+    background: rgba(0,229,255,.04);
+    box-shadow: 0 0 6px rgba(0,229,255,.08);
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .cv-skill-item:hover {
+    border-color: var(--cyan-mid);
+    box-shadow: var(--glow-c);
+    background: rgba(0,229,255,.08);
+  }
+
+  .cv-back {
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 560px) {
+    .cv-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    .cv-header-meta { flex-direction: column; gap: 0.5rem; }
+  }
+</style>

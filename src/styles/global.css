@@ -1,0 +1,281 @@
+/* src/styles/global.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* Backgrounds */
+  --bg:        #060609;
+  --bg-card:   rgba(6, 8, 20, 0.95);
+  --bg-panel:  rgba(0, 12, 24, 0.6);
+
+  /* Neon palette — Edgerunners */
+  --cyan:      #00e5ff;
+  --cyan-lo:   rgba(0, 229, 255, 0.10);
+  --cyan-mid:  rgba(0, 229, 255, 0.38);
+  --pink:      #ff2078;
+  --pink-lo:   rgba(255, 32, 120, 0.10);
+  --pink-mid:  rgba(255, 32, 120, 0.38);
+  --yellow:    #ffe600;
+  --amber:     #ff6400;
+  --violet:    #c050ff;
+
+  /* Foreground */
+  --fg:   #dde0f0;
+  --fg-2: #6878a0;
+  --fg-3: #222438;
+
+  /* Composite glows */
+  --glow-c: 0 0 8px rgba(0,229,255,.65), 0 0 28px rgba(0,229,255,.22);
+  --glow-p: 0 0 8px rgba(255,32,120,.65), 0 0 28px rgba(255,32,120,.22);
+  --glow-y: 0 0 8px rgba(255,230,0,.65),  0 0 28px rgba(255,230,0,.22);
+
+  /* Typography */
+  --font-display: 'Orbitron',      sans-serif;
+  --font-body:    'Exo 2',         sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+
+  /* Layout */
+  --max-w:       1100px;
+  --pad-x:       clamp(1.5rem, 6vw, 5rem);
+  --sec-gap:     clamp(4rem, 9vw, 7rem);
+}
+
+/* ── Reset ─────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CRT grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,.022) 1px, transparent 1px);
+  background-size: 55px 55px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Scanlines */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,.045) 3px,
+    rgba(0,0,0,.045) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+::selection { background: var(--cyan); color: var(--bg); }
+
+::-webkit-scrollbar        { width: 3px; }
+::-webkit-scrollbar-track  { background: var(--bg); }
+::-webkit-scrollbar-thumb  { background: var(--cyan); box-shadow: var(--glow-c); }
+
+a { color: inherit; text-decoration: none; }
+
+/* ── Section shell ──────────────────────────────────── */
+.s {
+  position: relative;
+  padding: var(--sec-gap) var(--pad-x);
+}
+.s-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+.s-narrow {
+  max-width: 700px;
+}
+
+/* ── Ghost section number ───────────────────────────── */
+.sec-num {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 20vw, 16rem);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,229,255,.055);
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+}
+
+/* ── Section label ──────────────────────────────────── */
+.sec-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  color: var(--cyan);
+  margin-bottom: 2.5rem;
+}
+.sec-label-pink { color: var(--pink); }
+.sec-label-yellow { color: var(--yellow); }
+
+/* ── Glitch text ─────────────────────────────────────  */
+.glitch { position: relative; }
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--bg);
+}
+.glitch::before {
+  color: var(--pink);
+  animation: glitch-a 6s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+.glitch::after {
+  color: var(--cyan);
+  animation: glitch-b 6s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+@keyframes glitch-a {
+  0%, 84%, 100% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transform: translate(0); }
+  86%  { clip-path: polygon(0 12%, 100% 12%, 100% 38%, 0 38%); transform: translate(-3px); }
+  89%  { clip-path: polygon(0 58%, 100% 58%, 100% 78%, 0 78%); transform: translate(3px); }
+  92%  { clip-path: polygon(0 4%,  100% 4%,  100% 24%, 0 24%); transform: translate(-2px); }
+  95%  { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+}
+@keyframes glitch-b {
+  0%, 84%, 100% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transform: translate(0); }
+  86%  { clip-path: polygon(0 62%, 100% 62%, 100% 84%, 0 84%); transform: translate(3px); }
+  89%  { clip-path: polygon(0 22%, 100% 22%, 100% 42%, 0 42%); transform: translate(-3px); }
+  92%  { clip-path: polygon(0 72%, 100% 72%, 100% 90%, 0 90%); transform: translate(2px); }
+  95%  { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+}
+
+/* ── Neon text helpers ──────────────────────────────── */
+.text-cyan   { color: var(--cyan); }
+.text-pink   { color: var(--pink); }
+.text-yellow { color: var(--yellow); }
+.text-muted  { color: var(--fg-2); }
+
+/* ── Neon button ────────────────────────────────────── */
+.btn-neon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border: 1px solid var(--cyan-mid);
+  box-shadow: 0 0 8px rgba(0,229,255,.18), inset 0 0 8px rgba(0,229,255,.04);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,.08), transparent);
+  transition: left 0.4s ease;
+}
+.btn-neon:hover {
+  border-color: var(--cyan);
+  color: var(--fg);
+  box-shadow: var(--glow-c);
+}
+.btn-neon:hover::before { left: 100%; }
+
+/* ── Section divider ────────────────────────────────── */
+.seg-wrap {
+  padding: 0 var(--pad-x);
+  position: relative;
+  z-index: 5;
+}
+.seg {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.seg-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,.22), transparent);
+}
+.seg-text {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: rgba(0,229,255,.32);
+  white-space: nowrap;
+}
+
+/* ── HUD corner brackets ────────────────────────────── */
+.hud {
+  position: relative;
+  padding: 1.5rem;
+}
+.hud::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 20px; height: 20px;
+  border-top: 1px solid rgba(0,229,255,.5);
+  border-left: 1px solid rgba(0,229,255,.5);
+}
+.hud::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 20px; height: 20px;
+  border-bottom: 1px solid rgba(0,229,255,.5);
+  border-right: 1px solid rgba(0,229,255,.5);
+}
+
+/* ── Neon pulse animation ───────────────────────────── */
+@keyframes neon-flicker {
+  0%, 96%, 100% { opacity: 1; }
+  97%  { opacity: .6; }
+  98%  { opacity: 1; }
+  99%  { opacity: .4; }
+}
+.neon-flicker { animation: neon-flicker 6s infinite; }
+
+/* ── Body text block ────────────────────────────────── */
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--fg);
+}
+.prose p.muted  { color: var(--fg-2); }
+.prose p.cyan   { color: var(--cyan); font-family: var(--font-mono); font-size: 0.9em; }
+.prose p.accent { color: var(--pink); }
