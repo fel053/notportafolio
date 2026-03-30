@@ -3,6 +3,7 @@
 import '../styles/global.css';
 import NavStatus from '../components/vue/NavStatus.vue';
 import VisibilityController from '../components/vue/VisibilityController.vue';
+import ClientRouter from 'astro/components/ClientRouter.astro';
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -10,9 +11,10 @@ import VisibilityController from '../components/vue/VisibilityController.vue';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>// PORTAFOLIO</title>
+    <ClientRouter />
   </head>
   <body>
-    <nav class="site-nav">
+    <nav class="site-nav" transition:persist>
       <a href="/" class="nav-brand">
         <span class="nav-bracket">[</span>
         <span class="nav-name neon-flicker">PORT_</span>
