@@ -213,6 +213,12 @@ a { color: inherit; text-decoration: none; }
   padding: 0 var(--pad-x);
   position: relative;
   z-index: 5;
+  opacity: 0;
+  animation: seg-appear 0.5s ease 0.2s both;
+}
+@keyframes seg-appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .seg {
   display: flex;
