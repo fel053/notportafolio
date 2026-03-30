@@ -19,17 +19,15 @@ import VisibilityController from '../components/vue/VisibilityController.vue';
         <span class="nav-bracket">]</span>
       </a>
       <div class="nav-right">
-        <NavStatus client:load />
+        <NavStatus client:only="vue" />
         <a href="/cv" class="nav-link">CV</a>
       </div>
     </nav>
 
-        <!-- El contenido principal es controlado por VisibilityController -->
-    <VisibilityController client:load>
-      <main>
-        <slot />
-      </main>
-    </VisibilityController>
+    <main>
+      <slot />
+    </main>
+    <VisibilityController client:only="vue" />
 
     <footer class="site-footer">
       <div class="footer-inner">

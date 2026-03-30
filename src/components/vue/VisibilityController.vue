@@ -1,12 +1,11 @@
 <!-- src/components/vue/VisibilityController.vue -->
 <template>
-  <div v-if="system.online" class="page-content">
-    <slot />
-  </div>
-  <div v-else class="offline-placeholder">
-    <span class="offline-message">// OFFLINE MODE //</span>
-    <span class="offline-sub">(todo el contenido está inactivo)</span>
-  </div>
+  <Transition name="offline-fade">
+    <div v-if="system.hydrated && !system.online" class="offline-overlay">
+      <span class="offline-message">// OFFLINE MODE //</span>
+      <span class="offline-sub">(todo el contenido está inactivo)</span>
+    </div>
+  </Transition>
 </template>
 
 <script setup>
@@ -16,16 +15,15 @@ const system = useSystemStore();
 </script>
 
 <style scoped>
-.page-content {
-  min-height: calc(100vh - 150px);
-}
-
-.offline-placeholder {
+.offline-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 150px);
+  background: var(--bg, #06060f);
   text-align: center;
   font-family: var(--font-mono);
   gap: 1rem;
@@ -41,5 +39,14 @@ const system = useSystemStore();
 .offline-sub {
   font-size: 0.8rem;
   color: rgba(0, 229, 255, 0.5);
+}
+
+.offline-fade-enter-active,
+.offline-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.offline-fade-enter-from,
+.offline-fade-leave-to {
+  opacity: 0;
 }
 </style>

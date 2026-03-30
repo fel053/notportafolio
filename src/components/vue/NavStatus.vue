@@ -1,19 +1,21 @@
 <script setup>
 import { useSystemStore } from '../../stores/system';
 
-const system = useSystemStore()
+const system = useSystemStore();
+
+const onToggle = () => system.toggle();
 </script>
 
 <template>
-
-  <span 
+  <span
     class="nav-status"
-    :class="{ offline: !system.online }"
-    @click="system.toggle()"
+    :class="{ offline: system.hydrated && !system.online }"
+    @click="onToggle"
   >
-    ● {{ system.online ? 'ONLINE' : 'OFFLINE' }}
+    ● 
+    <template v-if="!system.hydrated">CARGANDO...</template>
+    <template v-else>{{ system.online ? 'ONLINE' : 'OFFLINE' }}</template>
   </span>
-
 </template>
 
 <style>
